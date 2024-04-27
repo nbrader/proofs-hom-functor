@@ -156,7 +156,7 @@ Proof.
     destruct z.
     destruct f.
     destruct g.
-    intuition.
+    discriminate.
     intuition.
     intuition.
     intuition.
@@ -173,29 +173,84 @@ Proof.
     destruct z.
     destruct f.
     destruct g.
-    intuition.
+    discriminate.
     intuition.
     intuition.
     destruct f.
     destruct g.
     discriminate.
     discriminate.
+    intuition.
+    destruct g.
+    discriminate.
+    intuition.
     discriminate.
     discriminate.
     discriminate.
+    destruct f.
+    destruct g.
     discriminate.
     discriminate.
+    intuition.
+    destruct f.
+    destruct g.
+    discriminate.
     discriminate.
     intuition.
+    destruct f.
+    destruct g.
+    discriminate.
+    discriminate.
+    intuition.
+    destruct f.
+    destruct g.
+    discriminate.
+    discriminate.
+    destruct g.
+    discriminate.
+    intuition.
+    destruct z.
+    destruct f.
+    destruct g.
+    discriminate.
+    discriminate.
+    destruct g.
+    discriminate.
+    intuition.
+    destruct f.
+    destruct g.
+    discriminate.
+    intuition.
+    destruct g.
+    discriminate.
+    intuition.
+    destruct f.
+    destruct g.
+    discriminate.
+    discriminate.
+    intuition.
+    destruct f.
+    destruct g.
+    discriminate.
+    discriminate.
+    intuition.
+    destruct f.
+    destruct g.
+    discriminate.
+    discriminate.
+    destruct g.
     intuition.
     intuition.
+    destruct f.
+    destruct g.
+    discriminate.
+    discriminate.
     intuition.
-    intuition.
-    intuition.
-    intuition.
-    intuition.
-    intuition.
-    intuition.
+    destruct z.
+    destruct f.
+    destruct g.
+    discriminate.
+    discriminate.
     intuition.
 Qed.
 
