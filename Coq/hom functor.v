@@ -50,21 +50,17 @@ Inductive FiniteInt : Type :=
   | zero  : FiniteInt
   | one   : FiniteInt
   | two   : FiniteInt
-  | three : FiniteInt
-  | four  : FiniteInt
-  | five  : FiniteInt.
+  | three : FiniteInt.
 
 (* Relation representing the preorder on FiniteInt. *)
 (* In a preorder category, the morphisms correspond to the relation between objects. *)
 (* Since we're dealing with integers and a simple order, we can use `le` from Coq's standard library. *)
 Definition leq (x y : FiniteInt) : Prop :=
   match x, y with
-  | zero, _ => y = zero \/ y = one \/ y = two \/ y = three \/ y = four \/ y = five
-  | one, _ => y = one \/ y = two \/ y = three \/ y = four \/ y = five
-  | two, _ => y = two \/ y = three \/ y = four \/ y = five
-  | three, _ => y = three \/ y = four \/ y = five
-  | four, _ => y = four \/ y = five
-  | five, _ => y = five
+  | zero, _ => True
+  | one, _ => y = one \/ y = two \/ y = three
+  | two, _ => y = two \/ y = three
+  | three, _ => y = three
   end.
 
 (* Morphism definition for the preorder. *)
@@ -117,12 +113,10 @@ Defined. *)
 
 Definition identity (x : FiniteInt) : Morphism x x :=
   match x with
-  | zero => or_introl eq_refl
+  | zero => I
   | one => or_introl eq_refl
   | two => or_introl eq_refl
-  | three => or_introl eq_refl
-  | four => or_introl eq_refl
-  | five => eq_refl
+  | three => eq_refl
   end.
 
 About eq_ind.
@@ -132,127 +126,18 @@ About or_intror.
 
 Definition compose {x y z : FiniteInt} (f : Morphism y z) (g : Morphism x y) : Morphism x z.
 Proof.
-  unfold Morphism; unfold leq.
-    Show Proof.
-    destruct x.
-    destruct y.
-    destruct z.
-    destruct f.
-    destruct g.
-    intuition.
-    intuition.
-    intuition.
-    intuition.
-    intuition.
-    intuition.
-    intuition.
-    intuition.
-    intuition.
-    intuition.
-    intuition.
-    intuition.
-    intuition.
-    destruct y.
-    destruct z.
-    destruct f.
-    destruct g.
-    discriminate.
-    intuition.
-    intuition.
-    intuition.
-    intuition.
-    intuition.
-    intuition.
-    intuition.
-    intuition.
-    intuition.
-    intuition.
-    intuition.
-    intuition.
-    destruct y.
-    destruct z.
-    destruct f.
-    destruct g.
-    discriminate.
-    intuition.
-    intuition.
-    destruct f.
-    destruct g.
-    discriminate.
-    discriminate.
-    intuition.
-    destruct g.
-    discriminate.
-    intuition.
-    discriminate.
-    discriminate.
-    discriminate.
-    destruct f.
-    destruct g.
-    discriminate.
-    discriminate.
-    intuition.
-    destruct f.
-    destruct g.
-    discriminate.
-    discriminate.
-    intuition.
-    destruct f.
-    destruct g.
-    discriminate.
-    discriminate.
-    intuition.
-    destruct f.
-    destruct g.
-    discriminate.
-    discriminate.
-    destruct g.
-    discriminate.
-    intuition.
-    destruct z.
-    destruct f.
-    destruct g.
-    discriminate.
-    discriminate.
-    destruct g.
-    discriminate.
-    intuition.
-    destruct f.
-    destruct g.
-    discriminate.
-    intuition.
-    destruct g.
-    discriminate.
-    intuition.
-    destruct f.
-    destruct g.
-    discriminate.
-    discriminate.
-    intuition.
-    destruct f.
-    destruct g.
-    discriminate.
-    discriminate.
-    intuition.
-    destruct f.
-    destruct g.
-    discriminate.
-    discriminate.
-    destruct g.
-    intuition.
-    intuition.
-    destruct f.
-    destruct g.
-    discriminate.
-    discriminate.
-    intuition.
-    destruct z.
-    destruct f.
-    destruct g.
-    discriminate.
-    discriminate.
-    intuition.
+  unfold Morphism, leq.
+  destruct x, y, z; simpl.  (* Destruct all combinations of x, y, z *)
+
+  try tauto;  (* Try to solve straightforward conclusions *)
+
+  (* Explicitly handle each case, considering the nature of leq *)
+  match x, y, z with
+  | _, _, _ => try contradiction  (* If the combination does not respect transitivity, it's not valid *)
+  end.
 Qed.
+
+
 
 
 
