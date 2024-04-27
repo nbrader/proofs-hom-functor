@@ -117,7 +117,7 @@ Defined. *)
 
 Definition identity (x : FiniteInt) : Morphism x x :=
   match x with
-  | zero => I
+  | zero => or_introl eq_refl
   | one => or_introl eq_refl
   | two => or_introl eq_refl
   | three => or_introl eq_refl
@@ -133,99 +133,70 @@ About or_intror.
 Definition compose {x y z : FiniteInt} (f : Morphism y z) (g : Morphism x y) : Morphism x z.
 Proof.
   unfold Morphism; unfold leq.
-  destruct x, y, z; simpl in *;
-    try (intros; discriminate);
-    auto.
-    intuition.
-    easy.
-    discriminate.
-    easy.
-    intuition.
-    discriminate.
-    easy.
-    intuition.
-    discriminate.
-    intuition.
-    easy.
-    intuition.
-    discriminate.
-    easy.
-    intuition.
-    discriminate.
-    easy.
-    intuition.
-    discriminate.
-    easy.
-    intuition.
-    discriminate.
-    intuition.
-    easy.
-    intuition.
-    discriminate.
-    easy.
-    intuition.
-    intuition.
-    discriminate.
-    easy.
-    intuition.
-    discriminate.
-    intuition.
-    easy.
-    intuition.
-    discriminate.
-    easy.
-    intuition.
-    discriminate.
-    easy.
-    intuition.
-    discriminate.
-    intuition.
-    easy.
-    intuition.
-    discriminate.
-    intuition.
-    easy.
-    intuition.
-    discriminate.
-    intuition.
-    easy.
-    intuition.
-    discriminate.
-    easy.
-    intuition.
-    discriminate.
-    easy.
-    intuition.
-    discriminate.
-    easy.
-    intuition.
-    discriminate.
-    easy.
-    intuition.
-    discriminate.
-    easy.
-    intuition.
-    discriminate.
-    easy.
-    intuition.
-    discriminate.
-    easy.
-    intuition.
-    discriminate.
-    easy.
-    intuition.
-    discriminate.
-    easy.
-    intuition.
-    discriminate.
-    easy.
-    intuition.
-    discriminate.
-    easy.
-    intuition.
-    discriminate.
-    easy.
     Show Proof.
+    destruct x.
+    destruct y.
+    destruct z.
+    destruct f.
+    destruct g.
+    intuition.
+    intuition.
+    intuition.
+    intuition.
+    intuition.
+    intuition.
+    intuition.
+    intuition.
+    intuition.
+    intuition.
+    intuition.
+    intuition.
+    intuition.
+    destruct y.
+    destruct z.
+    destruct f.
+    destruct g.
+    intuition.
+    intuition.
+    intuition.
+    intuition.
+    intuition.
+    intuition.
+    intuition.
+    intuition.
+    intuition.
+    intuition.
+    intuition.
+    intuition.
+    intuition.
+    destruct y.
+    destruct z.
+    destruct f.
+    destruct g.
+    intuition.
+    intuition.
+    intuition.
+    destruct f.
+    destruct g.
+    discriminate.
+    discriminate.
+    discriminate.
+    discriminate.
+    discriminate.
+    discriminate.
+    discriminate.
+    discriminate.
+    intuition.
+    intuition.
+    intuition.
+    intuition.
+    intuition.
+    intuition.
+    intuition.
+    intuition.
+    intuition.
+    intuition.
+    intuition.
 Qed.
 
 
