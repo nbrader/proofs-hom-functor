@@ -59,8 +59,8 @@ Inductive FiniteInt : Type :=
 (* Since we're dealing with integers and a simple order, we can use `le` from Coq's standard library. *)
 Definition leq (x y : FiniteInt) : Prop :=
   match x, y with
-  | zero, _ => True (* Zero is less than or equal to any element *)
-  | one, _ => y <> zero (* One is less than or equal to any element except zero *)
+  | zero, _ => y = zero \/ y = one \/ y = two \/ y = three \/ y = four \/ y = five
+  | one, _ => y = one \/ y = two \/ y = three \/ y = four \/ y = five
   | two, _ => y = two \/ y = three \/ y = four \/ y = five
   | three, _ => y = three \/ y = four \/ y = five
   | four, _ => y = four \/ y = five
@@ -118,15 +118,7 @@ Defined. *)
 Definition identity (x : FiniteInt) : Morphism x x :=
   match x with
   | zero => I
-  | one => fun H : one = zero =>
-             let H0 : False :=
-               eq_ind one
-                 (fun e : FiniteInt =>
-                   match e with
-                   | one => True
-                   | _ => False
-                   end) I zero H in
-             False_ind False H0
+  | one => or_introl eq_refl
   | two => or_introl eq_refl
   | three => or_introl eq_refl
   | four => or_introl eq_refl
