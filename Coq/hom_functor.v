@@ -1,7 +1,6 @@
 Require Import Coq.Arith.Arith.
 Require Import Coq.Logic.ProofIrrelevance.
 
-(* Definition of a category using Class *)
 Class Category := {
   Obj : Type;  (* Type of objects in the category *)
   Mor : Obj -> Obj -> Type;  (* Type of morphisms between objects *)
@@ -15,14 +14,13 @@ Class Category := {
                   compose h (compose g f) = compose (compose h g) f
 }.
 
-(* Example of a finite category based on the finite integers 0-3 *)
+(* Example of a finite category based on the integers 0-3 *)
 Inductive FiniteInt : Type :=
   | zero  : FiniteInt
   | one   : FiniteInt
   | two   : FiniteInt
   | three : FiniteInt.
 
-(* We will redefine the leq relation slightly for clarity, assuming it was initially defined as you described. *)
 Definition leq (x y : FiniteInt) : Prop :=
   match x, y with
   | zero, _ => True
@@ -32,7 +30,6 @@ Definition leq (x y : FiniteInt) : Prop :=
   | _, _ => False
   end.
 
-(* Let's redefine the reflexivity proofs to directly use propositional proofs instead of I, since I does not satisfy the expected type leq x x for non-zero cases. *)
 Definition leq_refl (x : FiniteInt) : leq x x :=
   match x return leq x x with
   | zero => I
@@ -41,7 +38,6 @@ Definition leq_refl (x : FiniteInt) : leq x x :=
   | three => I
   end.
 
-(* Define transitivity proof, respecting the actual values of x, y, z, and handling the proof objects explicitly *)
 Definition leq_trans (x y z : FiniteInt) (f : leq y z) (g : leq x y) : leq x z.
 Proof.
   case x, y, z; simpl; try (apply (leq_refl zero) || inversion f || inversion g).
@@ -75,7 +71,6 @@ Proof.
   try contradiction; apply proof_irrelevance.
 Qed.
 
-(* Use these lemmas in your Category instance *)
 Instance PreorderCategory : Category := {
   Obj := FiniteInt;
   Mor := leq;
