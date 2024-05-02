@@ -1,2 +1,3 @@
 -R . HomFunctor
 hom_functor.v
+StructCategory.v
