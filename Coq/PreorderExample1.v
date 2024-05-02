@@ -59,7 +59,7 @@ Proof.
   try contradiction; apply proof_irrelevance.
 Qed.
 
-Instance PreorderCategory : Category := {
+Instance PreorderExample1 : Category := {
   Obj := FiniteInt;
   Mor := leq;
 
