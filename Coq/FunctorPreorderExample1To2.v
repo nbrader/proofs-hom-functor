@@ -45,12 +45,8 @@ Qed.
 
 Definition id_preservation_proof : forall X : FiniteInt, map_mor_1_to_2_mor X X PreorderExample1.(id) = PreorderExample2.(id).
 Proof.
-  induction X.
-  destruct map_mor_1_to_2_mor.
-  - apply proof_irrelevance.
-  - apply proof_irrelevance.
-  - apply proof_irrelevance.
-  - apply proof_irrelevance.
+  intros.
+  apply proof_irrelevance.
 Qed.
 
 Definition comp_preservation_proof : forall (X Y Z : PreorderExample1.(Obj)) (f : Mor Y Z) (g : Mor X Y),
@@ -58,7 +54,6 @@ Definition comp_preservation_proof : forall (X Y Z : PreorderExample1.(Obj)) (f 
   compose (map_mor_1_to_2_mor Y Z f) (map_mor_1_to_2_mor X Y g).
 Proof.
   intros.
-  induction X, Y, Z; 
   apply proof_irrelevance.
 Qed.
 
