@@ -9,22 +9,21 @@ Inductive FiniteInt : Type :=
   | two   : FiniteInt
   | three : FiniteInt.
 
-Definition leq (x y : FiniteInt) : Prop :=
+Definition leq_pred (x y : FiniteInt) : bool :=
   match x, y with
-  | zero, _ => True
-  | one, one | one, two | one, three => True
-  | two, two | two, three => True
-  | three, three => True
-  | _, _ => False
+  | zero, _ => true
+  | one, one | one, two | one, three => true
+  | two, two | two, three => true
+  | three, three => true
+  | _, _ => false
   end.
 
-Definition leq_refl (x : FiniteInt) : leq x x :=
-  match x return leq x x with
-  | zero => I
-  | one => I
-  | two => I
-  | three => I
-  end.
+Definition leq (x y : FiniteInt) := leq_pred x y = true.
+
+Theorem leq_refl (x : FiniteInt) : leq x x.
+Proof.
+  unfold leq; induction x; auto.
+Qed.
 
 Definition leq_trans (x y z : FiniteInt) (f : leq y z) (g : leq x y) : leq x z.
 Proof.
@@ -33,30 +32,21 @@ Defined.
 
 Lemma left_identity_proof : forall (x y : FiniteInt) (f : leq x y), @leq_trans x y y (leq_refl y) f = f.
 Proof.
-  intros x y f.
-  unfold leq_refl, leq_trans.
-  destruct x, y; simpl in *;
-  try reflexivity;
-  try contradiction; apply proof_irrelevance.
+  intros.
+  apply proof_irrelevance.
 Qed.
 
 Lemma right_identity_proof : forall (x y : FiniteInt) (f : leq x y), @leq_trans x x y f (leq_refl x) = f.
 Proof.
-  intros x y f.
-  unfold leq_refl, leq_trans.
-  destruct x, y; simpl in *;
-  try reflexivity;
-  try contradiction; apply proof_irrelevance.
+  intros.
+  apply proof_irrelevance.
 Qed.
 
 Lemma associativity_proof : forall (x y z w : FiniteInt) (f : leq w x) (g : leq x y) (h : leq y z),
                   leq_trans w y z h (leq_trans w x y g f) = leq_trans w x z (leq_trans x y z h g) f.
 Proof.
   intros.
-  unfold leq_refl, leq_trans.
-  destruct x, y; simpl in *;
-  try reflexivity;
-  try contradiction; apply proof_irrelevance.
+  apply proof_irrelevance.
 Qed.
 
 Instance PreorderExample1 : Category := {
