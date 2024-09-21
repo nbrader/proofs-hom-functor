@@ -19,9 +19,6 @@ Qed.
 
 Definition leb_mor := fun X Y => { p : Nat.leb X Y = true | True }.
 
-Definition example : { p : true = true | True } :=
-  exist _ eq_refl I.
-
 Definition map_mor_1_to_2_mor (X Y : FiniteInt) (f : leq X Y) : leb_mor (map_obj_1_to_2 X) (map_obj_1_to_2 Y).
 Proof.
   unfold leb_mor.
@@ -43,21 +40,62 @@ Proof.
   first [ exact (exist _ eq_refl I) | (unfold leq in f; simpl in f; discriminate) ].
   first [ exact (exist _ eq_refl I) | (unfold leq in f; simpl in f; discriminate) ].
   first [ exact (exist _ eq_refl I) | (unfold leq in f; simpl in f; discriminate) ].
-  first [ exact (exist _ eq_refl I) | (unfold leq in f; simpl in f; discriminate) ].  
+  first [ exact (exist _ eq_refl I) | (unfold leq in f; simpl in f; discriminate) ].
 Qed.
 
-Definition id_preservation_proof (X : FiniteInt) : leq X X = le (map_obj_1_to_2 X) (map_obj_1_to_2 X).
+Definition true_eq : true = true := eq_refl.
+
+Definition true_eq_sig : { p : true = true | True } :=
+  exist _ true_eq I.
+
+Definition true_eq_sig_to_eq (s : { p : true = true | True }) : true = true :=
+  proj1_sig s.
+
+Definition eq_to_true_eq_sig (p : true = true) : { p' : true = true | True } :=
+  exist _ p I.
+
+Theorem true_eq_isomorphism : (true = true) <-> { _ : true = true | True }.
 Proof.
-  induction X; simpl; unfold leq; simpl.
+  split.
+  - (* From true = true to the dependent pair *)
+    intro H.
+    apply eq_to_true_eq_sig in H.
+    exact H.
+
+  - (* From the dependent pair to true = true *)
+    intro H.
+    apply true_eq_sig_to_eq in H.
+    exact H.
 Qed.
+
+Definition id_preservation_proof (X : FiniteInt) : leq X X = leb_mor (map_obj_1_to_2 X) (map_obj_1_to_2 X).
+Proof.
+  induction X; simpl; unfold leq; unfold leb_mor; simpl.
+  
+(*
+Goal 1
+
+(1 / 4)
+(true = true) = {_ : true = true | True}
+Goal 2
+
+(2 / 4)
+(true = true) = {_ : true = true | True}
+Goal 3
+
+(3 / 4)
+(true = true) = {_ : true = true | True}
+Goal 4
+
+(4 / 4)
+(true = true) = {_ : true = true | True}
+*)
+Admitted.
 
 Definition comp_preservation_proof (X Y Z : FiniteInt) (f : leq Y Z) (g : leq X Y) : 
   map_mor_1_to_2 (compose g f) = le (map_obj_1_to_2 X) (map_obj_1_to_2 Z).
 Proof.
-  (* You will need to show that the composition of morphisms is preserved *)
-  (* Replace this with your actual proof *)
-  reflexivity.
-Qed.
+Admitted.
 
 Instance FunctorPreorderExample1to2 : Functor PreorderExample1 PreorderExample2 :=
   { map_obj := map_obj_1_to_2;
