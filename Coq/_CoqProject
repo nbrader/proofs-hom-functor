@@ -1,6 +1,7 @@
 -R . HomFunctor
 PreorderExample1.v
 PreorderExample2.v
+PreorderExample3.v
 FunctorPreorderExample1to2.v
 StructCategory.v
 StructFunctor.v
