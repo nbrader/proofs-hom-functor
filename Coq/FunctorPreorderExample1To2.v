@@ -68,34 +68,24 @@ Proof.
     exact H.
 Qed.
 
-Definition id_preservation_proof (X : FiniteInt) : leq X X = leb_mor (map_obj_1_to_2 X) (map_obj_1_to_2 X).
+Definition id_preservation_proof : forall X : FiniteInt, map_mor_1_to_2_mor X X PreorderExample1.(id) = PreorderExample2.(id).
 Proof.
-  induction X; simpl; unfold leq; unfold leb_mor; simpl.
-  
-(*
-Goal 1
+  induction X.
+  destruct map_mor_1_to_2_mor.
+  - apply proof_irrelevance.
+  - apply proof_irrelevance.
+  - apply proof_irrelevance.
+  - apply proof_irrelevance.
+Qed.
 
-(1 / 4)
-(true = true) = {_ : true = true | True}
-Goal 2
-
-(2 / 4)
-(true = true) = {_ : true = true | True}
-Goal 3
-
-(3 / 4)
-(true = true) = {_ : true = true | True}
-Goal 4
-
-(4 / 4)
-(true = true) = {_ : true = true | True}
-*)
-Admitted.
-
-Definition comp_preservation_proof (X Y Z : FiniteInt) (f : leq Y Z) (g : leq X Y) : 
-  map_mor_1_to_2 (compose g f) = le (map_obj_1_to_2 X) (map_obj_1_to_2 Z).
+Definition comp_preservation_proof : forall (X Y Z : PreorderExample1.(Obj)) (f : Mor Y Z) (g : Mor X Y),
+  map_mor_1_to_2_mor X Z (compose f g) =
+  compose (map_mor_1_to_2_mor Y Z f) (map_mor_1_to_2_mor X Y g).
 Proof.
-Admitted.
+  intros.
+  induction X, Y, Z; 
+  apply proof_irrelevance.
+Qed.
 
 Instance FunctorPreorderExample1to2 : Functor PreorderExample1 PreorderExample2 :=
   { map_obj := map_obj_1_to_2;
