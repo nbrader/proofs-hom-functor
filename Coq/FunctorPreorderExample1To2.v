@@ -43,31 +43,6 @@ Proof.
   first [ exact (exist _ eq_refl I) | (unfold leq in f; simpl in f; discriminate) ].
 Qed.
 
-Definition true_eq : true = true := eq_refl.
-
-Definition true_eq_sig : { p : true = true | True } :=
-  exist _ true_eq I.
-
-Definition true_eq_sig_to_eq (s : { p : true = true | True }) : true = true :=
-  proj1_sig s.
-
-Definition eq_to_true_eq_sig (p : true = true) : { p' : true = true | True } :=
-  exist _ p I.
-
-Theorem true_eq_isomorphism : (true = true) <-> { _ : true = true | True }.
-Proof.
-  split.
-  - (* From true = true to the dependent pair *)
-    intro H.
-    apply eq_to_true_eq_sig in H.
-    exact H.
-
-  - (* From the dependent pair to true = true *)
-    intro H.
-    apply true_eq_sig_to_eq in H.
-    exact H.
-Qed.
-
 Definition id_preservation_proof : forall X : FiniteInt, map_mor_1_to_2_mor X X PreorderExample1.(id) = PreorderExample2.(id).
 Proof.
   induction X.
