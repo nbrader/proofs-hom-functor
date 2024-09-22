@@ -31,7 +31,7 @@ Proof.
 Qed.
 
 
-Instance PreorderExample3 : Category := {
+Instance PreorderExample3 : LocallySmallCategory := {
   Obj := nat;
   Mor := le;
 

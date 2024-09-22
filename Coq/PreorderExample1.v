@@ -49,7 +49,7 @@ Proof.
   apply proof_irrelevance.
 Qed.
 
-Instance PreorderExample1 : Category := {
+Instance PreorderExample1 : LocallySmallCategory := {
   Obj := FiniteInt;
   Mor := leq;
 

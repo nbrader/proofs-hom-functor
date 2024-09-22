@@ -4,7 +4,7 @@ Require Import HomFunctor.StructCategory.
 Require Import Coq.Program.Basics.
 Require Import Coq.Init.Datatypes.
 
-Definition Func (X Y : Set) : Type := X -> Y.
+Definition Func (X Y : Set) : Set := X -> Y.
 
 Definition idFunc (X : Set) : Func X X := fun x => x.
 
@@ -27,7 +27,7 @@ Proof.
   auto.
 Qed.
 
-Instance CategorySet : Category := {
+Instance CategorySet : LocallySmallCategory := {
   Obj := Set;
   Mor := Func;
 

@@ -45,7 +45,7 @@ Proof.
   apply proof_irrelevance.
 Qed.
 
-Instance PreorderExample2 : Category := {
+Instance PreorderExample2 : LocallySmallCategory := {
   Obj := nat;
   
   (* Morphisms are proofs that Nat.leb X Y = true, wrapped in sig *)

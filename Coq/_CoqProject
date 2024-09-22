@@ -6,4 +6,5 @@ CategorySet.v
 FunctorPreorderExample1to2.v
 StructCategory.v
 StructFunctor.v
+StructCofunctor.v
 HomFunctor.v
