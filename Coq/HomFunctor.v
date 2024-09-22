@@ -1,6 +1,4 @@
-Require Import Coq.Logic.ProofIrrelevance.
 Require Import HomFunctor.StructCategory.
-Require Import HomFunctor.StructFunctor.
 Require Import HomFunctor.StructCofunctor.
 Require Import HomFunctor.CategorySet.
 Require Import Coq.Logic.FunctionalExtensionality.

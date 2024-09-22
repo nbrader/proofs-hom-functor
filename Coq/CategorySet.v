@@ -1,8 +1,5 @@
-Require Import Coq.Arith.Arith.
-Require Import Coq.Logic.ProofIrrelevance.
 Require Import HomFunctor.StructCategory.
 Require Import Coq.Program.Basics.
-Require Import Coq.Init.Datatypes.
 
 Definition Func (X Y : Set) : Set := X -> Y.
 
