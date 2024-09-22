@@ -16,7 +16,7 @@ Definition map_mor_hom {A X1 X2 : C.(Obj)} (f : C.(Mor) X1 X2) :
 Definition id_preservation_proof {A : C.(Obj)} :
   forall (X : C.(Obj)), map_mor_hom (@id _ X) = @id _ (map_obj_hom A X).
 Proof.
-  intros X. unfold map_obj_hom, map_mor_hom.
+  intros X. unfold map_mor_hom.
   extensionality g. (* Use functional extensionality *)
   rewrite right_identity.
   unfold id.
