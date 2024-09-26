@@ -25,7 +25,7 @@ Definition id_preservation_proof {A : C.(Obj)} :
 Definition comp_preservation_proof {A : C.(Obj)} :
   forall (X1 X2 X3 : C.(Obj)) (f : C.(Mor) X2 X3) (g : C.(Mor) X1 X2),
     map_mor_hom (compose f g) = compose (map_mor_hom g) (map_mor_hom f) :=
-  fun (X1 X2 X3 : C.(Obj)) (f : C.(Mor) X2 X3) (g : C.(Mor) X1 X2) =>
+  fun X1 X2 X3 f g =>
     functional_extensionality
       (fun g0 : C.(Mor) X3 A => compose g0 (compose f g))
       (fun g0 : C.(Mor) X3 A => compose (compose g0 f) g)
