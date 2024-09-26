@@ -17,19 +17,19 @@ Definition id_preservation_proof {A : C.(Obj)} :
   forall (X : C.(Obj)), map_mor_hom (@id _ X) = @id _ (map_obj_hom A X) :=
   fun X =>
     functional_extensionality
-      (fun g => map_mor_hom (@id _ X) g)
-      (fun g => @id _ (map_obj_hom A X) g)
-      (fun g => eq_ind _ _ eq_refl _ (right_identity g)).
+      (fun f => map_mor_hom (@id _ X) f)
+      (fun f => @id _ (map_obj_hom A X) f)
+      (fun f => eq_ind _ _ eq_refl _ (right_identity f)).
 
 (* Proof that the functor preserves composition *)
 Definition comp_preservation_proof {A : C.(Obj)} :
-  forall (X1 X2 X3 : C.(Obj)) (f : C.(Mor) X2 X3) (g : C.(Mor) X1 X2),
-    map_mor_hom (compose f g) = compose (map_mor_hom g) (map_mor_hom f) :=
-  fun X1 X2 X3 f g =>
+  forall (X1 X2 X3 : C.(Obj)) (g : C.(Mor) X2 X3) (f : C.(Mor) X1 X2),
+    map_mor_hom (compose g f) = compose (map_mor_hom f) (map_mor_hom g) :=
+  fun X1 X2 X3 g f =>
     functional_extensionality
-      (fun g0 : C.(Mor) X3 A => compose g0 (compose f g))
-      (fun g0 : C.(Mor) X3 A => compose (compose g0 f) g)
-      (fun h : C.(Mor) X3 A => associativity g f h).
+      (fun h : C.(Mor) X3 A => compose h (compose g f))
+      (fun h : C.(Mor) X3 A => compose (compose h g) f)
+      (fun h : C.(Mor) X3 A => associativity f g h).
 
 (* Final definition of the HomFunctor instance *)
 Instance HomFunctor (A : C.(Obj)) : Cofunctor C CategorySet := {
